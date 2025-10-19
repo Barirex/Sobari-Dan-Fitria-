@@ -71,4 +71,247 @@
     font-size:44px;
     margin:14px 0 4px;
     color: #fff;
-    text-shadow: 0 6px
+    text-shadow: 0 6px 20px rgba(0,0,0,0.35);
+    opacity:0;
+    transform: translateY(12px);
+    animation:fadeUp .8s ease-out .25s forwards;
+  }
+  .subtitle{
+    margin:0;font-weight:500;color:#f3fff8;opacity:0;transform:translateY(8px);
+    animation:fadeUp .8s ease-out .4s forwards;
+  }
+
+  @keyframes fadeUp{
+    to{opacity:1; transform:none}
+  }
+
+  /* Card area */
+  .card-area{
+    display:flex;
+    gap:22px;
+    padding:28px;
+    align-items:flex-start;
+    flex-wrap:wrap;
+    justify-content:center;
+    background:linear-gradient(180deg, rgba(255,255,255,0.85), rgba(255,255,255,0.95));
+  }
+
+  .card{
+    background:var(--card);
+    border-radius:14px;
+    padding:18px;
+    width:320px;
+    box-shadow: 0 8px 28px rgba(34,50,30,0.06);
+    text-align:left;
+    transform:translateY(18px);
+    opacity:0;
+    animation:cardIn .8s ease-out forwards;
+  }
+  .card:nth-child(1){animation-delay:.15s}
+  .card:nth-child(2){animation-delay:.30s}
+  .card:nth-child(3){animation-delay:.45s}
+
+  @keyframes cardIn{
+    to{opacity:1; transform:none}
+  }
+
+  .card h3{margin:0 0 8px;color:var(--accent-dark)}
+  .card p{margin:6px 0;color:var(--muted);line-height:1.45}
+  .names{
+    font-family:'Playfair Display', serif;
+    color:var(--accent);
+    font-size:22px;
+    font-weight:700;
+  }
+
+  /* invited */
+  .invited {
+    display:inline-block;
+    padding:12px 16px;
+    border-radius:10px;
+    background:linear-gradient(90deg,#f5fff9,#e9fff7);
+    border:1px solid rgba(47,157,138,0.08);
+    font-weight:600;
+    color:var(--accent-dark);
+  }
+
+  /* buttons */
+  .cta{
+    display:flex;
+    gap:12px;
+    margin-top:12px;
+    flex-wrap:wrap;
+  }
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:10px 14px;
+    border-radius:10px;
+    text-decoration:none;
+    color:white;
+    background:var(--accent);
+    border:none;
+    cursor:pointer;
+    font-weight:600;
+    box-shadow:0 8px 20px rgba(39,117,100,0.12);
+  }
+  .btn.ghost{
+    background:transparent;
+    color:var(--accent);
+    border:1px solid rgba(47,157,138,0.12);
+    box-shadow:none;
+  }
+
+  /* music control */
+  .music-control{
+    position: absolute;
+    top:16px;
+    right:16px;
+    z-index:5;
+    display:flex;
+    gap:8px;
+    align-items:center;
+  }
+  .music-btn{
+    background:rgba(255,255,255,0.85);
+    border-radius:999px;
+    border:0;
+    padding:8px 10px;
+    font-weight:700;
+    cursor:pointer;
+    box-shadow:0 6px 16px rgba(20,20,20,0.08);
+  }
+
+  /* footer */
+  footer{
+    width:100%;
+    max-width:1000px;
+    margin:18px;
+    background:transparent;
+    text-align:center;color:var(--muted);
+    padding:14px 8px 40px;
+  }
+
+  /* responsive */
+  @media (max-width:880px){
+    .hero-top{height:320px}
+    .card{width:100%}
+    .hero{margin:18px;border-radius:12px}
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="hero" role="banner" aria-label="Undangan Sobari & Fitria">
+      <div class="hero-top">
+        <div class="music-control" id="musicControl" aria-hidden="false">
+          <button class="music-btn" id="musicToggle" title="Play / Pause musik">⏯️</button>
+        </div>
+
+        <div class="hero-content">
+          <div class="small-label">The Wedding of</div>
+          <div class="title">Sobari &amp; Fitria</div>
+          <div class="subtitle">Sabtu, 6 Desember 2025 · 09.00 – 20.00 WIB</div>
+        </div>
+      </div>
+
+      <div class="card-area" role="main">
+        <div class="card" id="card-1">
+          <h3>Detail Acara</h3>
+          <p class="names">Resepsi — 09.00 – 20.00 WIB</p>
+          <p class="place">📍 Jl. Marzuki 9, Kp. Jembatan (Gg. Melati 3), Penggilingan</p>
+        </div>
+
+        <div class="card" id="card-2">
+          <h3>Untuk</h3>
+          <div class="invited" id="invitedName">Bapak/Ibu/Saudara/i [Nama Tamu]</div>
+          <div style="margin-top:10px" class="small">Kamu juga bisa menambahkan nama tamu lewat URL: <br><code>?name=Budi</code></div>
+        </div>
+
+        <div class="card" id="card-3">
+          <h3>Konfirmasi & Ucapan</h3>
+          <p>Klik tombol ini untuk konfirmasi hadir via WhatsApp:</p>
+          <div class="cta">
+            <a class="btn" id="waBtn" href="https://wa.me/6285719845513" target="_blank" rel="noopener">💬 Konfirmasi via WhatsApp</a>
+            <button class="btn ghost" id="openMap">📍 Buka Peta</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <div>Terima kasih atas doa & kehadirannya — Sobari & Fitria</div>
+      <div style="margin-top:8px;font-size:13px;color:#6b6b6b">© 2025</div>
+    </footer>
+  </div>
+
+  <!-- audio (public mp3) -->
+  <audio id="bgMusic" loop>
+    <source src="https://cdn.pixabay.com/audio/2023/04/17/audio_f7a7f84e91.mp3" type="audio/mp3">
+    Your browser does not support the audio element.
+  </audio>
+
+<script>
+  // -- set invited name from URL param "name"
+  (function(){
+    function getParam(k){
+      const p = new URLSearchParams(window.location.search);
+      return p.get(k);
+    }
+    const n = getParam('name');
+    if(n && n.trim().length) {
+      document.getElementById('invitedName').textContent = decodeURIComponent(n);
+    }
+  })();
+
+  // -- music play/pause toggle with gentle fade
+  (function(){
+    const audio = document.getElementById('bgMusic');
+    const btn = document.getElementById('musicToggle');
+
+    // try autoplay (may be blocked); start muted then unmute after user gesture
+    audio.volume = 0.0;
+    const tryStart = async () => {
+      try {
+        await audio.play();
+        // fade in
+        let vol = 0;
+        const fade = setInterval(()=> {
+          vol = Math.min(0.7, vol + 0.05);
+          audio.volume = vol;
+          if(vol >= 0.7) clearInterval(fade);
+        }, 120);
+        btn.textContent = '⏸️';
+      } catch(e){
+        // autoplay blocked — show "play" icon
+        btn.textContent = '▶️';
+      }
+    };
+    // try start after short delay
+    setTimeout(tryStart, 350);
+
+    // toggle on button
+    btn.addEventListener('click', ()=>{
+      if(audio.paused){
+        audio.play().then(()=> { btn.textContent='⏸️'; audio.volume = 0.7; });
+      } else {
+        audio.pause();
+        btn.textContent='▶️';
+      }
+    });
+  })();
+
+  // -- open google maps (simple)
+  document.getElementById('openMap').addEventListener('click', ()=>{
+    const q = encodeURIComponent('Jl. Marzuki 9, Kp. Jembatan (Gg. Melati 3), Penggilingan');
+    window.open('https://www.google.com/maps/search/?api=1&query=' + q, '_blank');
+  });
+
+  // small accessibility: reveal title after load
+  window.addEventListener('load', ()=> {
+    document.querySelector('.title').style.opacity = 1;
+  });
+</script>
+</body>
+</html>
